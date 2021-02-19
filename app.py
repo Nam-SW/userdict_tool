@@ -1,4 +1,3 @@
-from math import ceil
 from os import path
 
 from pandas import read_excel
@@ -185,4 +184,3 @@ class ToolApp(QWidget):
     def quit(self):
         self.save()
         QCoreApplication.instance().quit()
-

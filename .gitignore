@@ -128,3 +128,5 @@ dmypy.json
 # custom
 .dist/*
 .build/*
+.DS_Store
+main.spec

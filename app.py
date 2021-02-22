@@ -109,7 +109,7 @@ class ToolApp(QWidget):
             shortcut = QShortcut(QKeySequence("Ctrl+" + c), self)
             shortcut.activated.connect(f)
 
-        self.setWindowTitle("test")
+        self.setWindowTitle("userdict_tool")
         self.setGeometry(300, 300, 800, 400)
         self.show()
 
@@ -175,7 +175,7 @@ class ToolApp(QWidget):
 
         if self.save:
             self.save = False
-            self.setWindowTitle("test *")
+            self.setWindowTitle("userdict_tool *")
 
     def delete_last_one(self):
         del self.userdict[0]
@@ -183,7 +183,7 @@ class ToolApp(QWidget):
 
         if self.save:
             self.save = False
-            self.setWindowTitle("test *")
+            self.setWindowTitle("userdict_tool *")
 
     def save(self):
         if self.userdict_path is not None:
@@ -193,7 +193,7 @@ class ToolApp(QWidget):
 
             if not self.save:
                 self.save = True
-                self.setWindowTitle("test")
+                self.setWindowTitle("userdict_tool")
 
     def quit(self):
         self.save()

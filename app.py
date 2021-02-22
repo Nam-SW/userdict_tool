@@ -97,16 +97,17 @@ class ToolApp(QWidget):
         grid.addWidget(self.end_button, 5, 4)
 
         # 단축키
-        self.save_shortcut = QShortcut(QKeySequence("Ctrl+S"), self)
-        self.save_shortcut.activated.connect(self.save)
-        self.quit_shortcut = QShortcut(QKeySequence("Ctrl+Q"), self)
-        self.quit_shortcut.activated.connect(self.quit)
-        self.prev_shortcut = QShortcut(QKeySequence("Ctrl+["), self)
-        self.prev_shortcut.activated.connect(self.prev_show)
-        self.next_shortcut = QShortcut(QKeySequence("Ctrl+]"), self)
-        self.next_shortcut.activated.connect(self.next_show)
-        self.backspace = QShortcut(QKeySequence("Ctrl+Backspace"), self)
-        self.backspace.activated.connect(self.delete_last_one)
+        for c in ["S", "ㄴ"]:
+            shortcut = QShortcut(QKeySequence("Ctrl+" + c), self)
+            shortcut.activated.connect(self.save)
+
+        for c, f in [
+            ("[", self.prev_show),
+            ("]", self.next_show),
+            ("Backspace", self.delete_last_one),
+        ]:
+            shortcut = QShortcut(QKeySequence("Ctrl+" + c), self)
+            shortcut.activated.connect(f)
 
         self.setWindowTitle("test")
         self.setGeometry(300, 300, 800, 400)

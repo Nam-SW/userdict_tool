@@ -173,16 +173,16 @@ class ToolApp(QWidget):
         self.input_tokens_lineedit.setText("")
         self.userdict_textedit.setText("\n".join(self.userdict))
 
-        if self.save:
-            self.save = False
+        if self.saved:
+            self.saved = False
             self.setWindowTitle("userdict_tool *")
 
     def delete_last_one(self):
         del self.userdict[0]
         self.userdict_textedit.setText("\n".join(self.userdict))
 
-        if self.save:
-            self.save = False
+        if self.saved:
+            self.saved = False
             self.setWindowTitle("userdict_tool *")
 
     def save(self):
@@ -191,8 +191,8 @@ class ToolApp(QWidget):
                 for token in self.userdict:
                     f.write(token + "\n")
 
-            if not self.save:
-                self.save = True
+            if not self.saved:
+                self.saved = True
                 self.setWindowTitle("userdict_tool")
 
     def quit(self):

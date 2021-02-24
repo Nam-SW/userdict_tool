@@ -27,6 +27,7 @@ class ToolApp(QWidget):
         self.userdict_path = None
         self.saved = True
         self.userdict = []
+        self.fontsize = 13
 
         self.initUI()
 
@@ -41,7 +42,7 @@ class ToolApp(QWidget):
         ):
             grid.addWidget(QLabel(v), i, 0)
 
-        grid.addWidget(QLabel("userdict(reversed)"), 0, 4)
+        grid.addWidget(QLabel("font size"), 0, 4)
 
         # 버튼
         self.select_file_button = QPushButton(text="find")
@@ -56,14 +57,19 @@ class ToolApp(QWidget):
         self.datafile_lineedit = QLineEdit()
         self.userdict_filename_lineedit = QLineEdit("userdict_ko.txt")
 
+        self.fontsize_lineedit = QLineEdit(str(self.fontsize))
+        self.fontsize_lineedit.editingFinished.connect(self.set_font)
+
         self.original_textedit = QTextEdit()
         self.original_textedit.setReadOnly(True)
+        self.original_textedit.setFontPointSize(self.fontsize)
         self.splited_textedit = QTextEdit()
         self.splited_textedit.setReadOnly(True)
+        self.splited_textedit.setFontPointSize(self.fontsize)
 
         self.userdict_textedit = QTextEdit()
         self.userdict_textedit.setReadOnly(True)
-        # self.userdict_textedit.resize(50, 500)
+        self.userdict_textedit.setFontPointSize(self.fontsize)
 
         self.input_tokens_lineedit = QLineEdit()
         self.input_tokens_lineedit.editingFinished.connect(self.add_userdict)
@@ -91,10 +97,11 @@ class ToolApp(QWidget):
         grid.addWidget(self.original_textedit, 2, 1, 1, 3)
         grid.addWidget(self.splited_textedit, 3, 1, 1, 3)
         grid.addWidget(self.input_tokens_lineedit, 4, 1, 1, 3)
-        grid.addWidget(self.userdict_textedit, 1, 4, 4, 1)
+        grid.addWidget(self.userdict_textedit, 1, 4, 4, 2)
+        grid.addWidget(self.fontsize_lineedit, 0, 5)
 
         grid.addLayout(hbox, 5, 0, 1, 4)
-        grid.addWidget(self.end_button, 5, 4)
+        grid.addWidget(self.end_button, 5, 4, 1, 2)
 
         # 단축키
         for c in ["S", "ㄴ"]:
@@ -198,3 +205,14 @@ class ToolApp(QWidget):
     def quit(self):
         self.save()
         QCoreApplication.instance().quit()
+
+    def set_font(self):
+        if self.fontsize_lineedit.text().isdigit():
+            self.fontsize = int(self.fontsize_lineedit.text())
+            self.fontsize = min(max(self.fontsize, 8), 50)
+            self.fontsize_lineedit.setText(str(self.fontsize))
+
+            self.original_textedit.setFontPointSize(self.fontsize)
+            self.splited_textedit.setFontPointSize(self.fontsize)
+            self.userdict_textedit.setFontPointSize(self.fontsize)
+            self.show_line()

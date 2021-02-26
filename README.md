@@ -1,6 +1,5 @@
 # userdict_tool
-사용자 단어사전 레이블링 도구  
-v0.1 기준 맥에서만 사용 가능합니다.
+사용자 단어사전 레이블링 도구
 
 # 사용방법
  ![main_ui](https://github.com/Nam-SW/userdict_tool/blob/main/resources/main_ui.png?raw=true)
